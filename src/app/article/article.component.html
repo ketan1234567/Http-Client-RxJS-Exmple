@@ -1,0 +1,21 @@
+<h1>article works!</h1>
+<table>
+    <tr>
+      <th> Id</th>
+      <th>Title</th>
+      <th>Category</th>
+      <th></th>
+      <th></th>
+    </tr>
+    <tr *ngFor="let article of allArticles">
+      <td>{{article.id}}</td>
+      <td>{{article.title}}</td>
+      <td>{{article.category}}</td>
+      <td>
+    <!---- <button type="button" (click)="loadArticleToEdit(article.id)">Edit</button>-->
+      </td>
+      <td>
+       <!----<button type="button" (click)="deleteArticle(article.id)">Delete</button>-->
+      </td>
+    </tr>
+  </table> 
