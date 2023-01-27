@@ -1,18 +1,13 @@
 <h1>article works!</h1>
 
-<h1>Angular Curd Example </h1>
-<h3 *ngIf="articleToUpdate; else create "> Update Article  for Id {{articleToUpdate}}</h3>
-<ng-templte>
-  <h3>Create New Article</h3>
-</ng-templte>
 <div>
-  <form [formGroup]="articleForm" (ngSubmit)="onArticleFormSubit()">
+  <form [formGroup]="articleForm" (ngSubmit)="onArticleFormSubmit()">
     <table>
       <tr>
         <td>Enter Title:</td>
         <td>
           <input formControlName="title" >
-          <label *ngIf="article.form.get('title').invalid && processValidation" class="error">
+          <label *ngIf="articleForm.get('title')?.invalid && processValidation" class="error">
             Title is required
           </label>
         </td>
@@ -21,7 +16,7 @@
         <td>Enter Category:</td>
         <td>
           <input formControlName="category" >
-          <label *ngIf="article.form.get('category').invalid && processValidation" class="error">
+          <label *ngIf="articleForm.get('category')?.invalid && processValidation" class="error">
             category  is required
           </label>
         </td>
@@ -29,7 +24,7 @@
       <tr>
       <td colspan="2">
         <button *ngIf="!articleIdToUpdate">Create</button>
-        <button *ngIf="articleToUpdate">Update</button>
+     
         <button (click)="backToCreateArticle()" *ngIf="articleIdToUpdate">go Back</button>
 
 

@@ -10,7 +10,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class ArticleService {
     //Url For Curd Operation
  articleUrl="/api/articles"
- handleError:any
+
   constructor(private http:HttpClient) { }
 
 
@@ -33,7 +33,7 @@ export class ArticleService {
   })
 
   //Create Articles
-  createArticle(article:Article):Observable<number>{
+  createArticle(article:any):Observable<number>{
     let httpHeaders=new HttpHeaders({
       'Content-Type':'application/json'
     });
@@ -52,7 +52,7 @@ export class ArticleService {
     }
    //Fetch Article By Id
 
-    getArticleById(articleId:string):Observable<Article[]>{
+    getArticleById(articleId:any):Observable<Article[]>{
       return this.http.get<Article>(this.articleUrl+"/"+articleId).pipe(
         tap(article=>console.log(article.title+""+article.category)),
         catchError(this.handleError)
@@ -62,7 +62,7 @@ export class ArticleService {
 
     //update article by id
 
-    updateArticle(article:Article):Observable<number>{
+    updateArticle(article:any):Observable<number>{
       let httpHeaders= new HttpHeaders({
         'Content-type':'application/json'
       });
@@ -86,5 +86,9 @@ export class ArticleService {
       catchError(this.handleError)
     );
   }
+  private handleError(error: any) {
+    console.error(error);
+    return throwError(error);
+}
 
 }

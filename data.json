@@ -1,0 +1,19 @@
+{
+  "article": [
+    {
+      "title": "angular by krishna",
+      "category": "angular",
+      "id": 1
+    },
+    {
+      "title": "core java by vishnu",
+      "category": "java",
+      "id": 2
+    },
+    {
+      "title": "ng rx by ram",
+      "category": "ketan",
+      "id": 3
+    }
+  ]
+}

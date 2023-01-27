@@ -17,6 +17,7 @@ export class ArticleComponent implements OnInit {
   requestProcessing = false;
   articleIdToUpdate = null;
   processValidation = false;
+  id:any;
 
 
   	//Create form
@@ -61,10 +62,10 @@ export class ArticleComponent implements OnInit {
 
         //generate article id (logic for demo)
 
-        let maxIndex = article.length - 1;
-        let articleWithMaxIndex = article[maxIndex];
+        let maxIndex = articles.length - 1;
+        let articleWithMaxIndex = articles[maxIndex];
         let articleId = articleWithMaxIndex.id + 1;
-        article.id = articleId;
+        articles.id = articleId;
 
 
         //Create article
