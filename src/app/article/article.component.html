@@ -1,4 +1,63 @@
 <h1>article works!</h1>
+
+<h1>Angular Curd Example </h1>
+<h3 *ngIf="articleToUpdate; else create "> Update Article  for Id {{articleToUpdate}}</h3>
+<ng-templte>
+  <h3>Create New Article</h3>
+</ng-templte>
+<div>
+  <form [formGroup]="articleForm" (ngSubmit)="onArticleFormSubit()">
+    <table>
+      <tr>
+        <td>Enter Title:</td>
+        <td>
+          <input formControlName="title" >
+          <label *ngIf="article.form.get('title').invalid && processValidation" class="error">
+            Title is required
+          </label>
+        </td>
+      </tr>
+      <tr>
+        <td>Enter Category:</td>
+        <td>
+          <input formControlName="category" >
+          <label *ngIf="article.form.get('category').invalid && processValidation" class="error">
+            category  is required
+          </label>
+        </td>
+      </tr>
+      <tr>
+      <td colspan="2">
+        <button *ngIf="!articleIdToUpdate">Create</button>
+        <button *ngIf="articleToUpdate">Update</button>
+        <button (click)="backToCreateArticle()" *ngIf="articleIdToUpdate">go Back</button>
+
+
+      </td>
+      </tr>
+    </table>
+
+  </form>
+  <br/>
+  <div *ngIf="statusCode; else processing">
+    <div *ngIf="statusCode === 201" class="success">
+      Article added successfully.
+    </div>
+    <div *ngIf="statusCode === 200" class="success">
+      Article updated successfully.
+    </div>
+    <div *ngIf="statusCode === 204" class="success">
+      Article deleted successfully.
+    </div>
+    <div *ngIf="statusCode === 500" class="error">
+      Internal Server Error.
+    </div>
+  </div>
+  <ng-template #processing>
+    <img *ngIf="requestProcessing" src="assets/images/loading.gif">
+  </ng-template>
+
+</div>
 <table>
     <tr>
       <th> Id</th>

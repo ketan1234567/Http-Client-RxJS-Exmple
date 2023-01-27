@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Article } from '../article';
 import { Observable, catchError, map, tap, throwError } from 'rxjs';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +25,12 @@ export class ArticleService {
   }
 
 
+
+  articleForm=new FormGroup({
+    title:new FormControl('',Validators.required),
+    category:new FormControl('',Validators.required)
+
+  })
 
   //Create Articles
   createArticle(article:Article):Observable<number>{

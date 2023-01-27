@@ -1,5 +1,5 @@
-export class Article{
-    id:number | undefined;
-    title:string | undefined;
-    category:string | undefined;
+export interface Article{
+    id:number;
+    title:string;
+    category:string;
 }
