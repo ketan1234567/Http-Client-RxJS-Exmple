@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Article } from '../article';
 import { ArticleService } from './article.service';
 
@@ -16,7 +17,13 @@ export class ArticleComponent implements OnInit {
   requestProcessing = false;
   articleIdToUpdate = null;
   processValidation = false;
-  articleForm: any;
+
+
+  	//Create form
+	articleForm = new FormGroup({
+		title: new FormControl('', Validators.required),
+		category: new FormControl('', Validators.required)
+	});
 
   //create constructor to get services instance
 
