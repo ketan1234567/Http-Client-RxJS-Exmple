@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { ArticleComponent } from './article/article.component';
 import { TestData } from './test-data';
 import { HttpClientModule } from '@angular/common/http';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -19,6 +19,7 @@ import {FormsModule} from '@angular/forms';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule
     InMemoryWebApiModule.forRoot(TestData)
     
     
