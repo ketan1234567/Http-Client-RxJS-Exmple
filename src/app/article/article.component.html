@@ -23,9 +23,9 @@
       </tr>
       <tr>
       <td colspan="2">
-        <button *ngIf="!articleIdToUpdate">Create</button>
-     
-        <button (click)="backToCreateArticle()" *ngIf="articleIdToUpdate">go Back</button>
+        <button >Create</button>
+        <button  (click)="$event.preventDefault();updateUser()">update</button>
+   
 
 
       </td>
@@ -66,10 +66,10 @@
       <td>{{article.title}}</td>
       <td>{{article.category}}</td>
       <td>
-    <!---- <button type="button" (click)="loadArticleToEdit(article.id)">Edit</button>-->
+     <button type="button" (click)="loadArticleToEdit(article.id)">Edit</button>
       </td>
       <td>
-       <!----<button type="button" (click)="deleteArticle(article.id)">Delete</button>-->
+      <button type="button" (click)="deleteArticle(article.id)">Delete</button>
       </td>
     </tr>
   </table> 

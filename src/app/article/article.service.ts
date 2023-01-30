@@ -9,7 +9,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class ArticleService {
     //Url For Curd Operation
- articleUrl="/api/articles"
+ articleUrl="http://localhost:3000/article"
 
   constructor(private http:HttpClient) { }
 
@@ -25,20 +25,13 @@ export class ArticleService {
   }
 
 
-
-  articleForm=new FormGroup({
-    title:new FormControl('',Validators.required),
-    category:new FormControl('',Validators.required)
-
-  })
-
   //Create Articles
-  createArticle(article:any):Observable<number>{
+  createArticle(article:any):Observable<any>{
     let httpHeaders=new HttpHeaders({
       'Content-Type':'application/json'
     });
 
-    return this.http.post<Article>(this.articleUrl+"/"+article.id,article,{
+    return this.http.post<any>(this.articleUrl,article,{
       headers:httpHeaders,
       observe:'response'
     }
@@ -52,32 +45,32 @@ export class ArticleService {
     }
    //Fetch Article By Id
 
-    getArticleById(articleId:any):Observable<Article[]>{
-      return this.http.get<Article>(this.articleUrl+"/"+articleId).pipe(
-        tap(article=>console.log(article.title+""+article.category)),
-        catchError(this.handleError)
-      )
-    }
+  
+
+    //Fetch article by id
+    getArticleById(articleId: any): Observable<any> {
+      return this.http.get<any>(this.articleUrl + "/" + articleId).pipe(
+          tap(article => console.log(article.title + " " + article.category)),
+          catchError(this.handleError)
+      );
+  }
 
 
     //update article by id
 
-    updateArticle(article:any):Observable<number>{
-      let httpHeaders= new HttpHeaders({
-        'Content-type':'application/json'
+    updateArticle(article: any): Observable<any> {
+      let httpHeaders = new HttpHeaders({
+          'Content-Type': 'application/json'
       });
-      return this.http.put<Article>(this.articleUrl+"/"+ article.id,article,{
-         headers:httpHeaders,
-         observe:'response'
-
+      return this.http.put<any>(this.articleUrl+"/"+ article.id, article, {
+          headers: httpHeaders,
+          observe: 'response'
       }
-      
       ).pipe(
-
-        map(res=>res.status),
-        catchError(this.handleError)
+          map(res => res.status),
+          catchError(this.handleError)
       );
-    }
+  }
 
      // delete article by id
   deleteArticleById(articleId:string):Observable<number>{

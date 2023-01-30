@@ -11,20 +11,20 @@ import { ArticleService } from './article.service';
 })
 export class ArticleComponent implements OnInit {
 
+
   //Component Property 
   allArticles: Article[] = [];
   statusCode: any;
   requestProcessing = false;
-  articleIdToUpdate = null;
+  articleIdToUpdate:any;
   processValidation = false;
-  id:any;
+  
+  savedata:any;
 
 
   	//Create form
-	articleForm = new FormGroup({
-		title: new FormControl('', Validators.required),
-		category: new FormControl('', Validators.required)
-	});
+
+
 
   //create constructor to get services instance
 
@@ -34,6 +34,7 @@ export class ArticleComponent implements OnInit {
   //crete ngonInit and load articles
   ngOnInit(): void {
     this.getAllArticles();
+
   }
 
 
@@ -45,77 +46,60 @@ export class ArticleComponent implements OnInit {
       errorcode => this.statusCode = errorcode);
   }
 
-
+  articleForm = new FormGroup({
+    id:new FormControl(),
+		title: new FormControl('', Validators.required),
+		category: new FormControl('', Validators.required)
+	});
   //Handle create and update article
   onArticleFormSubmit() {
-    this.processValidation = true;
-    if (this.articleForm.valid) {
-      return; //validation failed ,exit form method
-    }
+    console.log("I am not article form submit");
     //Form is valid new perform  create or Update 
     this.preProcessConfiguration();
-    let article = this.articleForm.value;
-    if (this.articleIdToUpdate === null) {
-      //generate article id to create article
-      this.articleservices.getAllArticles().subscribe(articles => {
+          this.articleservices.createArticle(this.articleForm.value).subscribe(statusCode => {
+            //Expecting success code  201 From serve 
+            this.statusCode = 201;
+            this.getAllArticles();
+            this.backToCreateArticle();
+          },
+            errorCode => this.statusCode = errorCode
+          )
 
+       
+   
+}
+loadArticleToEdit(articleId: any) {
 
-        //generate article id (logic for demo)
+  this.preProcessConfiguration();
+		this.articleservices.getArticleById(articleId)
+			.subscribe(article => {
+				this.articleIdToUpdate = article.id;
+        console.log(this.articleIdToUpdate)
+				this.articleForm.setValue({id:this.articleIdToUpdate,title: article.title, category: article.category });
+        this.getAllArticles();
 
-        let maxIndex = articles.length - 1;
-        let articleWithMaxIndex = articles[maxIndex];
-        let articleId = articleWithMaxIndex.id + 1;
-        articles.id = articleId;
-
-
-        //Create article
-
-        this.articleservices.createArticle(article).subscribe(statusCode => {
-          //Expecting success code  201 From serve 
-          this.statusCode = this.statusCode;
-          this.getAllArticles();
-          this.backToCreateArticle();
-
-        },
-          errorCode => this.statusCode = errorCode
-
-        );
-
-      });
-
-
-    } else {
-
-      //Handle the update article 
-      article.id = this.articleIdToUpdate;
-      this.articleservices.updateArticle(article).subscribe(statusCode => {
-        // this.statuscode=statuscode
-        //expecting success code 204 from server
+				this.processValidation = true;
+				this.requestProcessing = false;
+      
+			},
+				errorCode => this.statusCode = errorCode);
+    }
+    updateUser(){
+      this.articleservices.updateArticle(this.articleForm.value).subscribe(item=>{
+        this.savedata=item;
         this.statusCode = 200;
         this.getAllArticles();
-        this.backToCreateArticle();
-      },
-        errorCode => this.statusCode = errorCode);
-
+      });
+   
     }
-
-  }
-  //load article to edit 
-  loadArticleToEdit(articleId: string) {
-    this.preProcessConfiguration();
-    this.articleservices.getArticleById(articleId).subscribe(
-      article => {
-     //   this.articleIdToUpdate = article.id;
-       // this.articleForm.setValue({ title: article.title, category: article.category });
-        this.processValidation = true;
-        this.requestProcessing = false;
-      },
-      errorCode => this.statusCode = errorCode);
+	//Load article by id to edit
 
 
-  }
+      //Update article
+
+
   //delete article
-  deleteArticle(articleId: string) {
+  deleteArticle(articleId: any) {
     this.preProcessConfiguration();
     this.articleservices.deleteArticleById(articleId).subscribe(statusCode => {
       this.statusCode = 204;
@@ -145,3 +129,4 @@ export class ArticleComponent implements OnInit {
 
 
 }
+
