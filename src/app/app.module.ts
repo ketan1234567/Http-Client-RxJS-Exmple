@@ -7,11 +7,13 @@ import { ArticleComponent } from './article/article.component';
 import { TestData } from './test-data';
 import { HttpClientModule } from '@angular/common/http';
 import {ReactiveFormsModule} from '@angular/forms';
+import { MergeMapComponent } from './merge-map/merge-map.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ArticleComponent
+    ArticleComponent,
+    MergeMapComponent
   ],
   imports: [
     BrowserModule,

@@ -10,19 +10,17 @@ import { ArticleService } from './article.service';
 
 })
 export class ArticleComponent implements OnInit {
-
-
   //Component Property 
   allArticles: Article[] = [];
   statusCode: any;
   requestProcessing = false;
-  articleIdToUpdate:any;
+  articleIdToUpdate: any;
   processValidation = false;
-  
-  savedata:any;
+
+  savedata: any;
 
 
-  	//Create form
+  //Create form
 
 
 
@@ -47,55 +45,56 @@ export class ArticleComponent implements OnInit {
   }
 
   articleForm = new FormGroup({
-    id:new FormControl(),
-		title: new FormControl('', Validators.required),
-		category: new FormControl('', Validators.required)
-	});
+    id: new FormControl(),
+    title: new FormControl('', Validators.required),
+    category: new FormControl('', Validators.required)
+  });
   //Handle create and update article
   onArticleFormSubmit() {
     console.log("I am not article form submit");
     //Form is valid new perform  create or Update 
     this.preProcessConfiguration();
-          this.articleservices.createArticle(this.articleForm.value).subscribe(statusCode => {
-            //Expecting success code  201 From serve 
-            this.statusCode = 201;
-            this.getAllArticles();
-            this.backToCreateArticle();
-          },
-            errorCode => this.statusCode = errorCode
-          )
+    this.articleservices.createArticle(this.articleForm.value).subscribe(statusCode => {
+      //Expecting success code  201 From serve 
+      this.statusCode = 201;
+      this.getAllArticles();
+      this.backToCreateArticle();
+    },
+      errorCode => this.statusCode = errorCode
+    )
 
-       
-   
-}
-loadArticleToEdit(articleId: any) {
 
-  this.preProcessConfiguration();
-		this.articleservices.getArticleById(articleId)
-			.subscribe(article => {
-				this.articleIdToUpdate = article.id;
+
+  }
+  loadArticleToEdit(articleId: any) {
+
+    this.preProcessConfiguration();
+    this.articleservices.getArticleById(articleId)
+      .subscribe(article => {
+        this.articleIdToUpdate = article.id;
         console.log(this.articleIdToUpdate)
-				this.articleForm.setValue({id:this.articleIdToUpdate,title: article.title, category: article.category });
+        this.articleForm.setValue({ id: this.articleIdToUpdate, title: article.title, category: article.category });
         this.getAllArticles();
 
-				this.processValidation = true;
-				this.requestProcessing = false;
-      
-			},
-				errorCode => this.statusCode = errorCode);
-    }
-    updateUser(){
-      this.articleservices.updateArticle(this.articleForm.value).subscribe(item=>{
-        this.savedata=item;
-        this.statusCode = 200;
-        this.getAllArticles();
-      });
-   
-    }
-	//Load article by id to edit
+        this.processValidation = true;
+        this.requestProcessing = false;
+
+      },
+        errorCode => this.statusCode = errorCode);
+  }
+   //Update article
+  updateUser() {
+    this.articleservices.updateArticle(this.articleForm.value).subscribe(item => {
+      this.savedata = item;
+      this.statusCode = 200;
+      this.getAllArticles();
+    });
+
+  }
+  //Load article by id to edit
 
 
-      //Update article
+ 
 
 
   //delete article
