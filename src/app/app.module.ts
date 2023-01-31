@@ -19,7 +19,8 @@ import { MergeMapComponent } from './merge-map/merge-map.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
     
     
     

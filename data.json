@@ -15,5 +15,31 @@
       "title": "fff",
       "category": "ddd"
     }
+  ],
+  "bookDetails": [
+    {
+      "id": 1,
+      "name": "hitesh"
+    },
+    {
+      "id": 2,
+      "name": "ketan"
+    },
+    {
+      "id": 3,
+      "name": "sujit"
+    },
+    {
+      "id": 103,
+      "name": "Book-103"
+    },
+    {
+      "id": 105,
+      "name": "Book-105"
+    },
+    {
+      "id": 104,
+      "name": "Book-104"
+    }
   ]
 }
