@@ -2,9 +2,14 @@
 <div *ngFor="let book of allBooks$ | async">
   Id: {{book.id}}, Name: {{book.name}}
 </div>
-<button (click)="addMoreBooks()">Get More Books</button>
+<button (click)="addMoreBooks()" >Get More Books</button>
 <h3>Search Book</h3>
   ID: <input [formControl]="bookId" >
 <div *ngIf="book">
   Id: {{book.id}}, Name: {{book.name}}
 </div> 
+<br><br>
+
+<div *ngFor="let users of bookstore">
+  Id: {{users.id}}, Name: {{users.name}}
+</div>

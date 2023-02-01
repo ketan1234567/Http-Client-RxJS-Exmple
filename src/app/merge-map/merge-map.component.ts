@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, merge, of } from 'rxjs';
-import { catchError, delay, map, mergeMap, switchMap } from 'rxjs/operators'; 
+import { Observable, fromEvent, interval, merge, of, throwError } from 'rxjs';
+import { catchError, delay, map, mergeMap, retry, switchMap } from 'rxjs/operators'; 
 import { BookServicesService } from './book-services.service';
 import { Book } from './book';
 import { FormControl } from '@angular/forms';
@@ -14,12 +14,32 @@ export class MergeMapComponent implements OnInit {
 
   allBooks$:Observable<Book[]> | undefined; 
   book:any=Book;
+  bookstore:any
+ 
   constructor(private service:BookServicesService){}
   ngOnInit() {
     this.searchBook();
     this.getAllBooks();
+    this.addblock();
 
-    of('x','y','z').pipe(
+    of("A", "B").pipe(
+      switchMap(el => {
+      if (el === "B") {
+     // return throwError("Error occurred.");
+      }
+      return el;
+      }),
+      retry(1000),
+      catchError(err => {
+      console.error(err);
+      return throwError("User defined error.");
+      })
+    ).subscribe(el => console.log(el),
+      err => console.error(err),
+      () => console.log("Processing Complete.")
+    ); 
+
+    /*of('x','y','z').pipe(
       mergeMap(e1=>of(1,2).pipe(
         delay(2000),
         map(num=>e1+num)
@@ -27,11 +47,37 @@ export class MergeMapComponent implements OnInit {
       
 
     ).subscribe(res=>console.log(res))
+
+   /* of(1,2,3,4).pipe(
+      mergeMap(data=>{
+        if(data===3){
+          return throwError("Error ocuured for data "+3)
+        }
+        return of(data);
+        
+
+      })
+    ).subscribe(res=>(console.log(res)))
+    */
+
+    /*of(2,4,3).pipe(
+      mergeMap(x=>x===3? throwError("Error Recevied"+3):of('a','b')),
+      map(x=>x+"ll")
+    ).subscribe(x=>console.log(x),
+     e=>console.log(e)
+    )*/
+
    
-
-
 }
-id=102;
+addblock(){
+  console.log("ketan");
+  return this.service.getbook(this.id).subscribe(res=>{
+    this.bookstore=res
+
+
+  })
+}
+id=1;
 addMoreBooks(){
   let book1 = new Book(++this.id, "Book-"+ this.id);
   let book2 = new Book(++this.id, "Book-"+ this.id);
@@ -70,4 +116,8 @@ searchBook(){
  getAllBooks() {
     this.allBooks$ = this.service.getAllBooks();
  }
+
+
+
+
 }

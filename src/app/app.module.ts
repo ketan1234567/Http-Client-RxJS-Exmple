@@ -8,12 +8,14 @@ import { TestData } from './test-data';
 import { HttpClientModule } from '@angular/common/http';
 import {ReactiveFormsModule} from '@angular/forms';
 import { MergeMapComponent } from './merge-map/merge-map.component';
+import { FilterComponent } from './filter/filter.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ArticleComponent,
-    MergeMapComponent
+    MergeMapComponent,
+    FilterComponent
   ],
   imports: [
     BrowserModule,

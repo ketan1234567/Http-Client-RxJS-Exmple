@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Book } from './book';
-import { Observable } from 'rxjs';
+import { Observable, catchError, of, retry, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +28,18 @@ export class BookServicesService {
     return this.http.get<Book[]>(this.bookUrl);
 
   }
-  
+  getbook(data:any):Observable<any>{
+    let url =this.bookUrl;
+ 
+    return this.http.get<any>(url).pipe(
+      tap(()=>console.log(url)),
+      retry(3), // Retry the failed request up to 3 times
+      catchError(err=>{
+        console.log(err);
+        return of(null);
+      })
+    )
+
+  }
 
 }
