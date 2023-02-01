@@ -9,6 +9,14 @@ import { FilterService } from './filter.service';
 })
 export class FilterComponent implements OnInit {
   StdNames$:any
+  isAppled=true;
+  result=40;
+
+  h = 300;
+	w = 200;
+	bdr = 5;
+	clspn = 2;
+
   countryNames$:any=Observable<string>;
   countrystates:[]=[];
   constructor(private services:FilterService){}
