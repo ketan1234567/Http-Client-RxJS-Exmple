@@ -9,13 +9,17 @@ import { HttpClientModule } from '@angular/common/http';
 import {ReactiveFormsModule} from '@angular/forms';
 import { MergeMapComponent } from './merge-map/merge-map.component';
 import { FilterComponent } from './filter/filter.component';
+import { TapComponent } from './tap/tap.component';
+import { MapComponent } from './map/map.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ArticleComponent,
     MergeMapComponent,
-    FilterComponent
+    FilterComponent,
+    TapComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,

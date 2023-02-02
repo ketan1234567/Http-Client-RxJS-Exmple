@@ -27,7 +27,7 @@ export class MergeMapComponent implements OnInit {
     this.getAllBooks();
     this.addblock();
 
-    of("A", "B").pipe(
+   /* of("A", "B").pipe(
       switchMap(el => {
       if (el === "B") {
      // return throwError("Error occurred.");
@@ -65,12 +65,16 @@ export class MergeMapComponent implements OnInit {
     ).subscribe(res=>(console.log(res)))
     */
 
-    /*of(2,4,3).pipe(
+    of(2,4,3).pipe(
       mergeMap(x=>x===3? throwError("Error Recevied"+3):of('a','b')),
-      map(x=>x+"ll")
+      map(x=>x+"ll"),
+      catchError(err=>{
+        console.log(err);
+        return of("");
+      }),
     ).subscribe(x=>console.log(x),
      e=>console.log(e)
-    )*/
+    )
 
    
 }

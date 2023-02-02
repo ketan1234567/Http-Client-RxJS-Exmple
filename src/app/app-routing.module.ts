@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { ArticleComponent } from './article/article.component';
 import { MergeMapComponent } from './merge-map/merge-map.component';
 import { FilterComponent } from './filter/filter.component';
+import { TapComponent } from './tap/tap.component';
+import { MapComponent } from './map/map.component';
 
 const routes: Routes = [
   {
@@ -17,7 +19,18 @@ const routes: Routes = [
   {
     path:"filter",
     component:FilterComponent
+  },
+  {
+    path:"tap",
+    component:TapComponent  
+  
+  },
+  {
+    path:"map",
+    component:MapComponent  
+  
   }
+
 
 ];
 
