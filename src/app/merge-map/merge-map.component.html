@@ -13,3 +13,6 @@
 <div *ngFor="let users of bookstore">
   Id: {{users.id}}, Name: {{users.name}}
 </div>
+<h3 [class.required]="isreq">This is class Binding
+</h3>
+<h4 [style.color]="result>30?'green':'yellow'">This is style binding </h4>

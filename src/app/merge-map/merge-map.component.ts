@@ -15,6 +15,11 @@ export class MergeMapComponent implements OnInit {
   allBooks$:Observable<Book[]> | undefined; 
   book:any=Book;
   bookstore:any
+  isreq=true;
+  result=34;
+  a:any;
+  b:any
+  anil:any
  
   constructor(private service:BookServicesService){}
   ngOnInit() {
@@ -120,4 +125,15 @@ searchBook(){
 
 
 
+
+
+
 }
+const sum = function (x, y) {
+  return console.log(x + y);
+}
+sum(10,20)
+
+let sum1 =a=>console.log(a)
+
+sum1(200000);
