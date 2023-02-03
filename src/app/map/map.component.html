@@ -1,9 +1,22 @@
 <h1>map works!</h1>
 <ul>
-    <li *ngFor=" let user of displaydata$ |async">
+    <li *ngFor=" let user of displaydata$ | async">
         {{user}}
    
  
     </li>
 
 </ul>
+<div *ngIf="countryNames$ | async as myCountryName">
+    {{myCountryName}} 
+  </div>
+<ul>
+    <li *ngFor="let state of countryStates" >
+      {{state}}
+    </li>
+  </ul> 
+  <ul>
+    <li *ngFor="let state of calculation$ | async" >
+      {{state}}
+    </li>
+  </ul> 
