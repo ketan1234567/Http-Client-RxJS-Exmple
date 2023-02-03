@@ -11,7 +11,7 @@ export class MapService {
     return of("vishal","ketan","kk","ss","aa");
   }
   getnumber():Observable<number>{
-    return of(100,2,3,4,5,6,7,8,9);
+    return of(10,10,10,10,10);
   }
   getCountry(){
     return of(new MyCountry());
