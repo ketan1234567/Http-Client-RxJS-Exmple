@@ -69,7 +69,7 @@ export class MapComponent  implements OnInit{
      ///using standalone pipe
 
 
-      calculatenumber2() {
+      calculatenumber2() {    
   //Create a function to accept Observable instance   
   const calculationFun = pipe(
       filter((n: number) => true),
